@@ -4,7 +4,7 @@
 ![Go Version](https://img.shields.io/badge/go-1.23.2-00ADD8.svg)
 ![Status](https://img.shields.io/badge/status-beta-yellow)
 
-**ABSRA** (Abstract Event Bus RESTful API) provides a clean HTTP API on top of Apache Kafka.  
+**ABSRA** provides a clean HTTP API on top of Apache Kafka.  
 It lets microservices publish and consume events without embedding Kafka client code—  
 handling schema validation, access control, and real‑time streaming for you.
 
@@ -36,3 +36,18 @@ Microservices often communicate via events, but direct Kafka integration brings:
 ## Architecture
 
 ![alt text](image.png)
+
+# Getting Started
+
+## Prerequisites
+
+- Go 1.23.2 or higher
+- Docker and Docker Compose
+- Kafka cluster (or Docker for local development)
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/nomannaa/absra.git
+cd absra
