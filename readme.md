@@ -49,5 +49,77 @@ Microservices often communicate via events, but direct Kafka integration brings:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/nomannaa/absra.git
-cd absra
+git clone https://github.com/nomannaq/project-absra.git
+cd project-absra
+```
+2. Configure your environment:
+```bash
+touch .env
+#Will add an example .env later
+```
+3. Run the service:
+```bash
+go run cmd/server/main.go
+```
+#Usage
+##Authentication
+##Obtain an authentication token:
+```bash
+curl -X POST http://localhost:8080/api/v1/auth/token \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_id": "order-service",
+    "secret": "your-secret"
+  }'
+```
+##Define Event Types with Schemas
+##Register a new event type with its JSON schema:
+```bash
+curl -X POST http://localhost:8080/api/v1/event-types \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "order.created",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "order_id": {"type": "string"},
+        "customer_id": {"type": "string"},
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "quantity": {"type": "integer"},
+              "price": {"type": "number"}
+            },
+            "required": ["id", "quantity", "price"]
+          }
+        },
+        "total": {"type": "number"}
+      },
+      "required": ["order_id", "customer_id", "items", "total"]
+    }
+  }'
+```
+##Publish Events
+##Publish an event (ABSRA validates it against the schema):
+
+```bash
+curl -X POST http://localhost:8080/api/v1/events/order.created \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "order_id": "ORD-12345",
+    "customer_id": "CUST-789",
+    "items": [
+      {
+        "id": "PROD-001",
+        "quantity": 2,
+        "price": 29.99
+      }
+    ],
+    "total": 59.98
+  }'
+```
