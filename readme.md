@@ -61,9 +61,9 @@ touch .env
 ```bash
 go run cmd/server/main.go
 ```
-#Usage
-##Authentication
-##Obtain an authentication token:
+# Usage
+## Authentication
+## Obtain an authentication token:
 ```bash
 curl -X POST http://localhost:8080/api/v1/auth/token \
   -H "Content-Type: application/json" \
@@ -72,8 +72,8 @@ curl -X POST http://localhost:8080/api/v1/auth/token \
     "secret": "your-secret"
   }'
 ```
-##Define Event Types with Schemas
-##Register a new event type with its JSON schema:
+## Define Event Types with Schemas
+## Register a new event type with its JSON schema:
 ```bash
 curl -X POST http://localhost:8080/api/v1/event-types \
   -H "Authorization: Bearer YOUR_TOKEN" \
@@ -103,8 +103,8 @@ curl -X POST http://localhost:8080/api/v1/event-types \
     }
   }'
 ```
-##Publish Events
-##Publish an event (ABSRA validates it against the schema):
+## Publish Events
+## Publish an event (ABSRA validates it against the schema):
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/events/order.created \
@@ -123,3 +123,36 @@ curl -X POST http://localhost:8080/api/v1/events/order.created \
     "total": 59.98
   }'
 ```
+## Consume Events via Streaming
+## Subscribe to events using Server-Sent Events (SSE):
+
+```bash
+curl -N -H "Authorization: Bearer YOUR_TOKEN" \
+  "http://localhost:8080/api/v1/streams?topic=order.created&topic=user.updated"
+  ```
+# API Reference
+![alt text](image-1.png)
+
+# Configuration
+## ABSRA is configured via environment variables, which can be provided in a .env file:
+![alt text](image-2.png)
+
+# Benefits for Microservices Teams
+- Focus on Domain Logic: Teams can focus on their business logic rather than messaging infrastructure.
+- Simplified Development: No Kafka client libraries needed in every service.
+- Consistency: Enforced data structures and formats via schema validation.
+- Security: Fine-grained access control without direct Kafka access.
+- Technology Independence: Underlying message broker can be changed without affecting services.
+- Cross-Language Support: Any service that can make HTTP requests can use the event bus.
+# Contributing
+## Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.Fork the repository.
+2.Create your feature branch (git checkout -b feature/amazing-feature).
+3.Commit your changes (git commit -m 'Add some amazing feature').
+Push to the branch (git push origin feature/amazing-feature).
+Open a Pull Request.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Built with ❤️ by Nouman Qureshi
