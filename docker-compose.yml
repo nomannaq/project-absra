@@ -1,6 +1,6 @@
 version: '3'
 services:
-  kafkaKraft:
+  kafka:
     image: bitnami/kafka:latest
     ports:
       - "29092:29092"
