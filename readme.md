@@ -132,6 +132,21 @@ curl -N -H "Authorization: Bearer YOUR_TOKEN" \
   ```
 # API Reference
 
+| Endpoint                       | Method | Description                          |
+|-------------------------------|--------|--------------------------------------|
+| `/api/v1/auth/token`          | POST   | Get authentication token             |
+| `/api/v1/event-types`         | GET    | List all registered event types      |
+| `/api/v1/event-types`         | POST   | Register a new event type with schema|
+| `/api/v1/event-types/:type`   | GET    | Get schema for specific event type   |
+| `/api/v1/events/:type`        | POST   | Publish an event of specified type   |
+| `/api/v1/streams`             | GET    | Subscribe to events via SSE          |
+| `/health`                     | GET    | Service health check                 |
+
+
+
+# Configuration
+## ABSRA is configured via environment variables, which can be provided in a .env file:
+
 | Variable                        | Description                          | Default             |
 |--------------------------------|--------------------------------------|---------------------|
 | `SERVER_ADDRESS`               | Server host address                  | `localhost`         |
@@ -147,9 +162,7 @@ curl -N -H "Authorization: Bearer YOUR_TOKEN" \
 | `SCHEMA_STORAGE_PATH`          | Local schema storage path            | `./schemas`         |
 | `STREAMING_BUFFER_SIZE`        | Event buffer size per consumer       | `100`               |
 | `STREAMING_KEEPALIVE_INTERVAL` | Keepalive interval                   | `30s`               |
-# Configuration
-## ABSRA is configured via environment variables, which can be provided in a .env file:
-![alt text](image-2.png)
+
 
 # Benefits for Microservices Teams
 - Focus on Domain Logic: Teams can focus on their business logic rather than messaging infrastructure.
