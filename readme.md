@@ -131,8 +131,22 @@ curl -N -H "Authorization: Bearer YOUR_TOKEN" \
   "http://localhost:8080/api/v1/streams?topic=order.created&topic=user.updated"
   ```
 # API Reference
-![alt text](image-1.png)
 
+| Variable                        | Description                          | Default             |
+|--------------------------------|--------------------------------------|---------------------|
+| `SERVER_ADDRESS`               | Server host address                  | `localhost`         |
+| `SERVER_PORT`                  | Server port                          | `8080`              |
+| `SERVER_MODE`                  | Gin mode (debug, release, test)     | `debug`             |
+| `KAFKA_BROKERS`                | Comma-separated Kafka brokers        | `localhost:9092`    |
+| `KAFKA_CONSUMER_GROUP`         | Consumer group ID                    | `event-bus-api`     |
+| `KAFKA_TOPIC_ACL`              | Topic access controls                | ``                  |
+| `AUTH_SECRET`                  | JWT signing secret                   | `required`          |
+| `AUTH_TOKEN_EXPIRATION_HOURS` | Token expiration time in hours       | `24`                |
+| `SCHEMA_REGISTRY_ENABLED`      | Enable schema validation             | `true`              |
+| `SCHEMA_REGISTRY_TYPE`         | Registry type (local, confluent)     | `local`             |
+| `SCHEMA_STORAGE_PATH`          | Local schema storage path            | `./schemas`         |
+| `STREAMING_BUFFER_SIZE`        | Event buffer size per consumer       | `100`               |
+| `STREAMING_KEEPALIVE_INTERVAL` | Keepalive interval                   | `30s`               |
 # Configuration
 ## ABSRA is configured via environment variables, which can be provided in a .env file:
 ![alt text](image-2.png)
